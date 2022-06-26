@@ -39,3 +39,7 @@ yarn-error.log*
 
 # cypress
 cypress/videos
+
+# Serverless directories
+.serverless
+.serverless_nextjs

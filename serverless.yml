@@ -1,0 +1,3 @@
+nextjsProject:
+  component: './node_modules/@sls-next/serverless-component'
+  bucketRegion: 'eu-west-1'

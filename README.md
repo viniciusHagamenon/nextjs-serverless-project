@@ -47,3 +47,15 @@ Jest is run by husky on the pre-commit hook
 #### CI
 
 Both Jest and Cypress have npm scripts to run on a CI environment: `yarn test:ci` and `yarn e2e:headless`
+
+## Deployment
+
+The project uses [serverless framework](https://www.serverless.com/framework/docs) with [serverless-next.js](https://github.com/serverless-nextjs/serverless-next.js) to quickly deploy to AWS.
+
+- To make a deploy: `yarn deploy` (you need to provide the AWS credentials)
+
+## Architecture
+
+This project uses [serverless-next.js](https://github.com/serverless-nextjs/serverless-next.js) to deploy to AWS lambdas, s3 and cloudfront. By design the project is deployed globally using [Lambda@Edge](https://aws.amazon.com/lambda/edge/).
+
+![architecture](https://raw.githubusercontent.com/serverless-nextjs/serverless-next.js/master/img/arch_no_grid.png)

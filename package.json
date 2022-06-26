@@ -4,6 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "deploy": "serverless --aws-profile dev-profile",
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "cypress": "cypress open",
@@ -19,6 +20,12 @@
     "react-dom": "18.1.0"
   },
   "devDependencies": {
+    "@sls-next/aws-cloudfront": "3.7.0",
+    "@sls-next/aws-lambda": "3.7.0",
+    "@sls-next/aws-sqs": "^3.7.0",
+    "@sls-next/domain": "^3.7.0",
+    "@sls-next/serverless-component": "3.7.0",
+    "@testing-library/cypress": "^8.0.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.1",
@@ -37,6 +44,7 @@
     "lint-staged": "^13.0.3",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
+    "serverless": "2.72.2",
     "start-server-and-test": "^1.14.0",
     "tailwindcss": "^3.1.2",
     "typescript": "4.7.4"
