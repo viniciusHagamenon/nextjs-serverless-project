@@ -59,3 +59,11 @@ The project uses [serverless framework](https://www.serverless.com/framework/doc
 This project uses [serverless-next.js](https://github.com/serverless-nextjs/serverless-next.js) to deploy to AWS lambdas, s3 and cloudfront. By design the project is deployed globally using [Lambda@Edge](https://aws.amazon.com/lambda/edge/).
 
 ![architecture](https://raw.githubusercontent.com/serverless-nextjs/serverless-next.js/master/img/arch_no_grid.png)
+
+## Tasks
+
+[ ] - Add interaction tests with Jest for adding customers
+
+[ ] - Add e2e test that check if a customer is there and add a new one
+
+[ ] - Add Sentry

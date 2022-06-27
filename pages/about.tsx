@@ -1,7 +1,9 @@
-import styles from '../styles/Home.module.css'
+import type { NextPage } from 'next'
 import Link from 'next/link'
 
-export default function About() {
+import styles from '../styles/about.module.css'
+
+const About: NextPage = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -15,3 +17,5 @@ export default function About() {
     </div>
   )
 }
+
+export default About

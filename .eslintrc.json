@@ -5,5 +5,14 @@
   ],
   "env": {
     "cypress/globals": true
+  },
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always-and-inside-groups",
+        "groups": [["external", "builtin"], "internal", "parent", "sibling", "index"]
+      }
+    ]
   }
 }
