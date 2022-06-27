@@ -83,7 +83,9 @@ const AddCustomer: NextPage = () => {
                 registerOptions={{ required: true, value: 'http://placeimg.com/640/480/people' }}
               />
               <div className="flex flex-col w-full">
-                <ButtonPrimary onClick={handleSubmit(onSubmit)}>Add New Customer</ButtonPrimary>
+                <ButtonPrimary data-testid="add-customer-submit" onClick={handleSubmit(onSubmit)}>
+                  Add New Customer
+                </ButtonPrimary>
               </div>
             </form>
           </FormProvider>

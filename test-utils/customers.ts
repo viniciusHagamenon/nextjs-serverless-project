@@ -1,12 +1,12 @@
 import { faker } from '@faker-js/faker'
 
 export const createCustomer = () => ({
-  id: faker.datatype.uuid(),
-  name: faker.company.companyName(),
-  email: faker.internet.email(),
-  vat: faker.random.numeric(10),
-  phone: faker.phone.number(),
-  country: faker.address.country(),
-  website: faker.internet.url(),
-  image: faker.image.avatar(),
+  Id: Number(faker.random.numeric(10)),
+  Name: faker.company.companyName(),
+  Email: faker.internet.email(),
+  Vat: faker.random.numeric(10),
+  Phone: faker.phone.number(),
+  Country: faker.address.country(),
+  Website: faker.internet.url(),
+  Image: faker.image.avatar(),
 })
