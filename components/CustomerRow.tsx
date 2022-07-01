@@ -8,7 +8,7 @@ export const CustomerRow: React.FC<{ customer: Customer }> = ({ customer }) => {
   const router = useRouter()
   return (
     <tr
-      className="border border-solid border-gray-400 bg-white"
+      className="border-b border-solid border-gray-300 bg-white"
       onClick={() => router.push(`/customer/${customer.Id}`)}
     >
       <td className="p-2">
