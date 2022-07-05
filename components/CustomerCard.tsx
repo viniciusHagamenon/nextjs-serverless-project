@@ -13,7 +13,7 @@ const DataInfo: React.FC<{ label: string; value?: React.ReactNode }> = ({ label,
 export const CustomerCard: React.FC<{ customer: Customer }> = ({ customer }) => {
   console.log('customer:', customer)
   return (
-    <div className="w-1/3 p-2">
+    <div className="w-1/3">
       <div className="border border-solid border-gray-400 bg-white rounded-b p-4 flex flex-col justify-between leading-normal">
         <div className="flex flex-col">
           {customer.Image && (

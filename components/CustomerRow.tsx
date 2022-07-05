@@ -8,17 +8,17 @@ export const CustomerRow: React.FC<{ customer: Customer }> = ({ customer }) => {
   const router = useRouter()
   return (
     <tr
-      className="border-b border-solid border-gray-300 bg-white"
-      onClick={() => router.push(`/customer/${customer.Id}`)}
+      className="border-b border-solid border-gray-300 bg-white cursor-pointer hover:bg-gray-100"
+      onClick={() => router.push(`/customers/${customer.Id}`)}
     >
       <td className="p-2">
         {customer.Image && (
-          <div className="relative h-8">
+          <div className="flex items-center">
             <Image
               src={customer.Image}
               alt={customer.Name}
-              layout="fill"
-              objectFit="cover"
+              width={96}
+              height={72}
               priority
               onError={e => console.log('Image error:', e)}
             />

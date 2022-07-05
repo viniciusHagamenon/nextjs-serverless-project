@@ -3,13 +3,10 @@ import { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from '
 import Head from 'next/head'
 
 import { CustomerRow } from '@/components/CustomerRow'
-import { ButtonPrimary } from '@/components/Buttons'
 
 import { fetcher } from '@/utils/fetcher'
 
-import { Customer } from './api/customers'
-
-const PAGE_SIZE = 20
+import { Customer, PAGE_SIZE } from './api/customers'
 
 type Props = {
   customers: Customer[]
@@ -61,6 +58,24 @@ const Home: NextPage<Props> = ({ customers: initialCustomers, totalCustomers }) 
     }
   }, [page, customers, totalCustomers, isLoading])
 
+  // Inifinity scroll pagination
+  useEffect(() => {
+    const onScroll = () => {
+      const { innerHeight: windowHeight, scrollY } = window
+      const bodyHeight = document.body.offsetHeight
+      const bottom = bodyHeight - windowHeight
+      const threshold = bottom - scrollY - 250
+
+      if (threshold < 0 && !isLoading && !lastPage) loadMore()
+    }
+
+    window.addEventListener('scroll', onScroll)
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [isLoading, lastPage, loadMore])
+
   const filteredCustomers = useMemo(() => {
     return customers.filter(customer => customer.Name.match(new RegExp(searchTerm, 'i')))
   }, [searchTerm, customers])
@@ -74,15 +89,22 @@ const Home: NextPage<Props> = ({ customers: initialCustomers, totalCustomers }) 
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col flex-1 w-full px-20">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between h-12">
           <h1 className="text-4xl font-bold">Customers App</h1>
           <input
             className="px-8 h-12 rounded-md border border-gray-400"
-            placeholder="Search..."
+            placeholder="Filter in list..."
             onChange={searchInList}
             value={searchTerm}
           />
         </div>
+        {listCustomers.length > 0 && (
+          <div className="mt-6">
+            <p>
+              Showing {listCustomers.length} of {totalCustomers} customers
+            </p>
+          </div>
+        )}
         <div className="mt-6 -mx-2">
           {listCustomers.length ? (
             <table className="table-auto w-full">
@@ -107,13 +129,8 @@ const Home: NextPage<Props> = ({ customers: initialCustomers, totalCustomers }) 
           )}
         </div>
         <br />
-        {isLoading ? (
-          <div className="px-12 text-center">Loading...</div>
-        ) : lastPage ? (
-          <div className="px-12 text-center">End of the customer list</div>
-        ) : (
-          <ButtonPrimary onClick={loadMore}>Load more</ButtonPrimary>
-        )}
+        {isLoading && <div className="px-12 text-center">Loading...</div>}
+        {lastPage && !isLoading && <div className="px-12 text-center">End of the customer list</div>}
       </main>
     </>
   )

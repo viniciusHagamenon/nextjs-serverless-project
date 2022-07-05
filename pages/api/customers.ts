@@ -18,23 +18,26 @@ type Data = {
   customers: Customer[]
 }
 
+// Warning: This is a hack, in the ideal scenario we would use a cache service like redis since each lambda instance would have your own memory that is not shared
 export let customers: Customer[]
 
-export const getCustomers = () => customers
-
-const PAGE_COUNT = 20
+export const PAGE_SIZE = 30
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const { method, body } = req
+  const {
+    method,
+    body,
+    query: { offset, limit },
+  } = req
 
   switch (method) {
     case 'GET':
-      fetcher(`https://u9opz1xf69.execute-api.eu-west-1.amazonaws.com/Stage/company?offset=0&limit=${PAGE_COUNT}`).then(
-        response => {
-          customers = response.Status = 'OK' ? response.Data : []
-          res.status(200).json({ customers })
-        }
-      )
+      fetcher(
+        `https://u9opz1xf69.execute-api.eu-west-1.amazonaws.com/Stage/company?offset=${offset}&limit=${limit}`
+      ).then(response => {
+        customers = response.Status = 'OK' ? response.Data : []
+        res.status(200).json({ customers })
+      })
       break
     case 'POST':
       // Validate payload
@@ -42,9 +45,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         return res.status(400).end('Name is missing!')
       }
 
+      // Warning: This is a hack, in the ideal scenario we would use a real database
       customers.push({
         ...body,
-        id: uuidv4(),
+        Id: uuidv4(),
       })
 
       res.status(200).json({ customers })

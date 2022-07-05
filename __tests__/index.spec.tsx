@@ -8,7 +8,7 @@ describe('Customers App', () => {
   it('renders a customer', () => {
     const customer = createCustomer()
 
-    render(<Home customers={[customer]} />)
+    render(<Home customers={[customer]} totalCustomers={500} />)
 
     const name = screen.getByText(customer.Name)
     const country = screen.getByText(customer.Country)
